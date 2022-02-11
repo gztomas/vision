@@ -15,7 +15,6 @@ export const DetectionFrame = styled.div`
   position: absolute;
   top: ${(props) => props.y1}px;
   width: ${(props) => props.x2 - props.x1}px;
-  z-index: 1;
 `;
 
 export const DetectionLabel = styled.span`
@@ -26,6 +25,10 @@ export const DetectionLabel = styled.span`
   position: relative;
   transform: translateY(50%);
   white-space: nowrap;
+  z-index: 1;
+  :hover {
+    z-index: 10;
+  }
 `;
 
 export const DetectionOverlay = styled.div`
