@@ -27,3 +27,10 @@ export const DetectionLabel = styled.span`
   transform: translateY(50%);
   white-space: nowrap;
 `;
+
+export const DetectionOverlay = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;

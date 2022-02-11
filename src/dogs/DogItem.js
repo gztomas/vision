@@ -4,8 +4,9 @@ import styled from "styled-components";
 import {
   DetectionFrame,
   DetectionLabel,
+  DetectionOverlay,
   WithDetections,
-} from "../detections/DetectionFrame";
+} from "../detections/Detection";
 import { fetchDetections } from "../detections/fetchDetections";
 import { fetchDataUrl } from "../utils";
 
@@ -25,9 +26,9 @@ export function DogItem({ url }) {
     <StyledListGroupItem>
       <WithDetections>
         {!detections && (
-          <CenteredOverlay>
+          <DetectionOverlay>
             <Spinner animation="grow" variant="success" />
-          </CenteredOverlay>
+          </DetectionOverlay>
         )}
         {detections &&
           detections.map(({ bbox, label, score }) => (
@@ -46,13 +47,6 @@ export function DogItem({ url }) {
     </StyledListGroupItem>
   );
 }
-
-const CenteredOverlay = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
 
 const StyledListGroupItem = styled(ListGroupItem)`
   min-height: 400px;

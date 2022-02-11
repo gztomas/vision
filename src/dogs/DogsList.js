@@ -7,13 +7,13 @@ import { fetchDogs } from "./fetchDogs";
 export function DogsList() {
   const [dogs, setDogs] = useState([]);
 
+  useEffect(() => fetchDogs().then(setDogs), []);
+
   useInfiniteScroller({
     threshold: 0.1,
     onMore: () =>
       fetchDogs().then((moreDogs) => setDogs((dogs) => dogs.concat(moreDogs))),
   });
-
-  useEffect(() => fetchDogs().then(setDogs), []);
 
   return (
     <ListGroup>
