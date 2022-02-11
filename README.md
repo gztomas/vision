@@ -1,16 +1,18 @@
 # Infinite Dogs!
 
 ## Goal 1
+
 - Use the [Dog API](https://dog.ceo/dog-api/) to get a dog image.
 - Use the [Open Vision API](https://openvisionapi.com/) to label the objects in the dog image. You may use the `getImageDataFromUrl` function in `utils.js` to load the binary image data to send to the API. Note that `getImageDataFromUrl` will scale the image to a max size of 500px.
 - Render the dog image with the bounding boxes from the Open Vision predictions.
 
 ## Goal 2
+
 - Implement infinite scrolling so we get infinite dogs! You may look up any API, but do not use a pre-built react infinite scrolling component.
 
-## Demo:
+## Open Vision API
 
-![Demo](demo.gif)
+Since https://api.openvisionapi.com seems down, I prepared a docker image to run it locally use `docker run -p 8000:8000 gztomas/ova-server`
 
 ---
 
