@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { ListGroupItem } from "react-bootstrap";
+import { ListGroupItem, Spinner } from "react-bootstrap";
+import styled from "styled-components";
 import {
   DetectionFrame,
   DetectionLabel,
@@ -15,25 +16,42 @@ export function DogItem({ url }) {
   }, [url]);
 
   return (
-    <ListGroupItem
-      style={{
-        minHeight: 400,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <StyledListGroupItem>
       <WithDetections>
+        {!detections && (
+          <CenteredOverlay>
+            <Spinner animation="grow" variant="success" />
+          </CenteredOverlay>
+        )}
         {detections &&
-          detections.map(({ rect, label }) => (
-            <DetectionFrame key={`${rect.x1},${rect.y1}`} {...rect}>
-              <DetectionLabel>{label}</DetectionLabel>
+          detections.map(({ bbox, label, score }) => (
+            <DetectionFrame key={`${bbox.x1},${bbox.y1}`} {...bbox}>
+              <DetectionLabel>
+                {label} {score}
+              </DetectionLabel>
             </DetectionFrame>
           ))}
-        {detections && (
-          <img alt="dog" src={url} key={url} style={{ maxWidth: 500 }} />
-        )}
+        <ContainedImage alt="dog" src={url} key={url} />
       </WithDetections>
-    </ListGroupItem>
+    </StyledListGroupItem>
   );
 }
+
+const CenteredOverlay = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+const ContainedImage = styled.img`
+  max-width: 500px;
+  max-height: 500px;
+`;
+
+const StyledListGroupItem = styled(ListGroupItem)`
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

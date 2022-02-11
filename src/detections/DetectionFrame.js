@@ -5,23 +5,25 @@ export const WithDetections = styled.div`
 `;
 
 export const DetectionFrame = styled.div`
-  border: 2px solid lightgreen;
-  position: absolute;
-  border-radius: 4px;
-  top: ${(props) => props.y1}px;
-  left: ${(props) => props.x1}px;
-  width: ${(props) => props.x2 - props.x1}px;
-  height: ${(props) => props.y2 - props.y1}px;
-  display: flex;
-  justify-content: center;
   align-items: flex-end;
+  border-radius: 4px;
+  border: 2px solid lightgreen;
+  display: flex;
+  height: ${(props) => props.y2 - props.y1}px;
+  justify-content: center;
+  left: ${(props) => props.x1}px;
+  position: absolute;
+  top: ${(props) => props.y1}px;
+  width: ${(props) => props.x2 - props.x1}px;
+  z-index: 1;
 `;
 
 export const DetectionLabel = styled.span`
-  color: white;
-  fontweight: bold;
   background-color: gray;
   border-radius: 4px;
+  color: white;
   padding: 0 4px;
+  position: relative;
   transform: translateY(50%);
+  white-space: nowrap;
 `;
