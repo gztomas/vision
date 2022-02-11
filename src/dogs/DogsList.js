@@ -4,15 +4,19 @@ import { useInfiniteScroller } from "../useInfiniteScroller";
 import { DogItem } from "./DogItem";
 import { fetchDogs } from "./fetchDogs";
 
+const PAGE_SIZE = 4;
+
 export function DogsList() {
   const [dogs, setDogs] = useState([]);
 
-  useEffect(() => fetchDogs().then(setDogs), []);
+  useEffect(() => fetchDogs(PAGE_SIZE).then(setDogs), []);
 
   useInfiniteScroller({
     threshold: 0.1,
     onMore: () =>
-      fetchDogs().then((moreDogs) => setDogs((dogs) => dogs.concat(moreDogs))),
+      fetchDogs(PAGE_SIZE).then((moreDogs) =>
+        setDogs((dogs) => dogs.concat(moreDogs))
+      ),
   });
 
   return (
