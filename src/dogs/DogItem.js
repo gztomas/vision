@@ -4,8 +4,8 @@ import {
   DetectionFrame,
   DetectionLabel,
   WithDetections,
-} from "./DetectionFrame";
-import { fetchDetections } from "./fetchDetections";
+} from "../detections/DetectionFrame";
+import { fetchDetections } from "../detections/fetchDetections";
 
 export function DogItem({ url }) {
   const [detections, setDetections] = useState();
