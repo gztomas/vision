@@ -1,13 +1,9 @@
-import getImageDataFromUrl from "../utils";
+import { getBlobFromDataUrl } from "../utils";
 
-export const fetchDetections = async (url) => {
+export const fetchDetections = async (dataUrl) => {
   const body = new FormData();
   body.append("model", "yolov4");
-  body.append(
-    "image",
-    await new Promise((resolve) => getImageDataFromUrl(url, resolve)),
-    "blob.jpg"
-  );
+  body.append("image", getBlobFromDataUrl(dataUrl));
   const resDetection = await fetch("http://localhost:8000/api/v1/detection", {
     method: "POST",
     body,

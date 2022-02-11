@@ -7,12 +7,18 @@ import {
   WithDetections,
 } from "../detections/DetectionFrame";
 import { fetchDetections } from "../detections/fetchDetections";
+import { fetchDataUrl } from "../utils";
 
 export function DogItem({ url }) {
   const [detections, setDetections] = useState();
+  const [dataUrl, setDataUrl] = useState();
 
   useEffect(() => {
-    fetchDetections(url).then(setDetections);
+    if (dataUrl) fetchDetections(dataUrl).then(setDetections);
+  }, [dataUrl]);
+
+  useEffect(() => {
+    fetchDataUrl(url).then(setDataUrl);
   }, [url]);
 
   return (
@@ -31,7 +37,11 @@ export function DogItem({ url }) {
               </DetectionLabel>
             </DetectionFrame>
           ))}
-        <ContainedImage alt="dog" src={url} key={url} />
+        {/* Not a big performance deal to use the original url since browser
+        will cache images. However, using the data url saves this presentation
+        component be aware of any transform performed by the utility functions,
+        like the size cap */}
+        {dataUrl && <img alt="dog" src={dataUrl} key={url} />}
       </WithDetections>
     </StyledListGroupItem>
   );
@@ -42,11 +52,6 @@ const CenteredOverlay = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-`;
-
-const ContainedImage = styled.img`
-  max-width: 500px;
-  max-height: 500px;
 `;
 
 const StyledListGroupItem = styled(ListGroupItem)`
